@@ -1,23 +1,48 @@
 import { Text, View } from '../../components/Themed';
-import React from 'react'
-import { StyleSheet,TextInput } from 'react-native';
-import { SimpleLineIcons ,Feather,MaterialCommunityIcons,AntDesign } from '@expo/vector-icons';
+import React,{useState} from 'react'
+import { StyleSheet,TextInput,Pressable } from 'react-native';
+import { SimpleLineIcons ,Feather,MaterialCommunityIcons,AntDesign, Ionicons } from '@expo/vector-icons';
 
 const MessageInput = () => {
+
+    const [message,setMessage] = useState('');
+
+    const sendMessage = () =>{
+        console.warn("sending",message)
+
+        setMessage('');
+    }
+
+    const onPlusClicked = () => {
+        
+    }
+
+    const onPress = () => {
+        if(message){
+            sendMessage();
+        }else{
+            onPlusClicked();
+        }
+    }
+
+    // console.warn(message);
+
   return (
     <View style={styles.root}>
       <View style={styles.inputContainer}>
         <SimpleLineIcons name='emotsmile' size={24} color='gray' style={styles.icon} />
         <TextInput 
             style={styles.input}
+            value={message}
+            onChangeText={ setMessage}
             placeholder="Drop the Message..."
         />
         <Feather name='camera' size={24} color='gray' style={{margin:5}} />
         <MaterialCommunityIcons name='microphone' size={24} color='gray' />
       </View>
-      <View style={styles.buttonContainer}>
-        <AntDesign name='plus' size={24} color='white' />
-      </View>
+      <Pressable onPress={onPress} style={styles.buttonContainer}>
+        {message ? <Ionicons name='send' size={20} color='white'/>:<AntDesign name='plus' size={24} color='white' />}
+      </Pressable>
     </View>
   )
 }
@@ -52,12 +77,13 @@ const styles = StyleSheet.create({
     },
 
     buttonContainer:{
-        width:50,
-        height:50,
+        width:40,
+        height:40,
         backgroundColor:'#3777f0',
         borderRadius:25,
         justifyContent:'center',
         alignItems:'center',
+        marginTop:3
         
     },
 
