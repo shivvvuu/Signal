@@ -6,13 +6,49 @@ import { LazyLoading, LazyLoadingDisabled, AsyncItem, AsyncCollection } from "@a
 
 
 
+type EagerChatRoom = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<ChatRoom, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly newMessage?: string | null;
+  readonly LastMessage?: Message | null;
+  readonly ChatRoomUser?: (ChatRoomUser | null)[] | null;
+  readonly Messages?: (Message | null)[] | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  readonly chatRoomLastMessageId?: string | null;
+}
+
+type LazyChatRoom = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<ChatRoom, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly newMessage?: string | null;
+  readonly LastMessage: AsyncItem<Message | undefined>;
+  readonly ChatRoomUser: AsyncCollection<ChatRoomUser>;
+  readonly Messages: AsyncCollection<Message>;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  readonly chatRoomLastMessageId?: string | null;
+}
+
+export declare type ChatRoom = LazyLoading extends LazyLoadingDisabled ? EagerChatRoom : LazyChatRoom
+
+export declare const ChatRoom: (new (init: ModelInit<ChatRoom>) => ChatRoom) & {
+  copyOf(source: ChatRoom, mutator: (draft: MutableModel<ChatRoom>) => MutableModel<ChatRoom> | void): ChatRoom;
+}
+
 type EagerMessage = {
   readonly [__modelMeta__]: {
     identifier: ManagedIdentifier<Message, 'id'>;
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
-  readonly content: string;
+  readonly contect: number;
   readonly userID: string;
   readonly chatroomID: string;
   readonly createdAt?: string | null;
@@ -25,7 +61,7 @@ type LazyMessage = {
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
-  readonly content: string;
+  readonly contect: number;
   readonly userID: string;
   readonly chatroomID: string;
   readonly createdAt?: string | null;
@@ -38,49 +74,13 @@ export declare const Message: (new (init: ModelInit<Message>) => Message) & {
   copyOf(source: Message, mutator: (draft: MutableModel<Message>) => MutableModel<Message> | void): Message;
 }
 
-type EagerChatRoom = {
-  readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<ChatRoom, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
-  };
-  readonly id: string;
-  readonly newMessages?: number | null;
-  readonly LastMessage?: Message | null;
-  readonly Messages?: (Message | null)[] | null;
-  readonly ChatRoomUsers?: (ChatRoomUser | null)[] | null;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-  readonly chatRoomLastMessageId?: string | null;
-}
-
-type LazyChatRoom = {
-  readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<ChatRoom, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
-  };
-  readonly id: string;
-  readonly newMessages?: number | null;
-  readonly LastMessage: AsyncItem<Message | undefined>;
-  readonly Messages: AsyncCollection<Message>;
-  readonly ChatRoomUsers: AsyncCollection<ChatRoomUser>;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-  readonly chatRoomLastMessageId?: string | null;
-}
-
-export declare type ChatRoom = LazyLoading extends LazyLoadingDisabled ? EagerChatRoom : LazyChatRoom
-
-export declare const ChatRoom: (new (init: ModelInit<ChatRoom>) => ChatRoom) & {
-  copyOf(source: ChatRoom, mutator: (draft: MutableModel<ChatRoom>) => MutableModel<ChatRoom> | void): ChatRoom;
-}
-
 type EagerUser = {
   readonly [__modelMeta__]: {
     identifier: ManagedIdentifier<User, 'id'>;
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
-  readonly name: string;
+  readonly name?: string | null;
   readonly imageUri?: string | null;
   readonly status?: string | null;
   readonly Messages?: (Message | null)[] | null;
@@ -95,7 +95,7 @@ type LazyUser = {
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
-  readonly name: string;
+  readonly name?: string | null;
   readonly imageUri?: string | null;
   readonly status?: string | null;
   readonly Messages: AsyncCollection<Message>;

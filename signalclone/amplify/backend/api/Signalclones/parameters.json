@@ -1,5 +1,5 @@
 {
-  "AppSyncApiName": "SignalClone",
+  "AppSyncApiName": "Signalclones",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
   "DynamoDBEnableServerSideEncryption": false
 }

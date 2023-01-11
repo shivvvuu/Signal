@@ -1,19 +1,29 @@
 {
   "staging": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-signalclone-staging-131623-authRole",
-      "UnauthRoleArn": "arn:aws:iam::538626334166:role/amplify-signalclone-staging-131623-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::538626334166:role/amplify-signalclone-staging-131623-authRole",
+      "AuthRoleName": "amplify-signalclones-staging-200812-authRole",
+      "UnauthRoleArn": "arn:aws:iam::538626334166:role/amplify-signalclones-staging-200812-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::538626334166:role/amplify-signalclones-staging-200812-authRole",
       "Region": "ap-northeast-1",
-      "DeploymentBucketName": "amplify-signalclone-staging-131623-deployment",
-      "UnauthRoleName": "amplify-signalclone-staging-131623-unauthRole",
-      "StackName": "amplify-signalclone-staging-131623",
-      "StackId": "arn:aws:cloudformation:ap-northeast-1:538626334166:stack/amplify-signalclone-staging-131623/d0b34970-901f-11ed-88e5-0e9f35ae7a21",
-      "AmplifyAppId": "d3jtjygdbwfknq"
+      "DeploymentBucketName": "amplify-signalclones-staging-200812-deployment",
+      "UnauthRoleName": "amplify-signalclones-staging-200812-unauthRole",
+      "StackName": "amplify-signalclones-staging-200812",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:538626334166:stack/amplify-signalclones-staging-200812/82f93880-9122-11ed-b0f2-0ecc9809dfcf",
+      "AmplifyAppId": "d17w8udscm8xxd",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-signalclones-staging-200812-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
     },
     "categories": {
       "auth": {
-        "SignalClone": {}
+        "Signalclones": {}
+      },
+      "function": {
+        "SignalclonesPostConfirmation": {
+          "deploymentBucketName": "amplify-signalclones-staging-200812-deployment",
+          "s3Key": "amplify-builds/SignalclonesPostConfirmation-616e6b505356332f6379-build.zip"
+        }
+      },
+      "api": {
+        "Signalclones": {}
       }
     }
   }

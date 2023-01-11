@@ -6,11 +6,11 @@ import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
 import { Amplify } from 'aws-amplify';
 import awsmobile from './src/aws-exports';
-// import { withAuthenticator  } from '@aws-amplify/ui-react-native';
+import { withAuthenticator  } from '@aws-amplify/ui-react-native';
 
 Amplify.configure(awsmobile);
 
-export default function App() {
+function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
 
@@ -26,4 +26,4 @@ export default function App() {
   }
 }
 
-// export default withAuthenticator(App);
+export default withAuthenticator(App);
