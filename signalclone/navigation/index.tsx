@@ -1,11 +1,11 @@
-/**
+ /**
  * If you are not familiar with React Navigation, refer to the "Fundamentals" guide:
  * https://reactnavigation.org/docs/getting-started
  *
  */
 import { Feather, FontAwesome } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme, DarkTheme, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
 import { ColorSchemeName, Image, Pressable, SafeAreaView, useWindowDimensions } from 'react-native';
@@ -16,11 +16,13 @@ import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import TabOneScreen from '../screens/HomeScreen';
 import ChatRoomScreen from '../screens/ChatRoomScreen';
-import HomeScreen from '../screens/HomeScreen'
+import HomeScreen from '../screens/HomeScreen';
+import UsersScreen from '../screens/UsersScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 import { Text, View } from '../components/Themed';
+// import Navigation from './index';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -43,6 +45,7 @@ function RootNavigator() {
     <Stack.Navigator>
       <Stack.Screen name="Home" component={HomeScreen} options={{headerTitle: HomeHeader}} /> 
       <Stack.Screen name="ChatRoom" component={ChatRoomScreen} options={{headerTitle:ChatRoomHeader,headerBackTitleVisible:false,title:'elon musk'}}  />
+      <Stack.Screen name="UsersRoom" component={UsersScreen} options={{title:'Users'}}  />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
@@ -53,6 +56,9 @@ function RootNavigator() {
 
 const HomeHeader = (props) =>{
   const {width} = useWindowDimensions();
+  const navigation = useNavigation();
+  
+
   return(
     <SafeAreaView style={{flexDirection:'row' , justifyContent:'space-between',width:'97%',padding:3,alignItems:'center' }}>
       <Image 
@@ -61,7 +67,9 @@ const HomeHeader = (props) =>{
       />
       <Text style={{flex:1,textAlign:'center' ,marginLeft:50,fontWeight:'bold'}}>Signal</Text>
       <Feather name='camera' size={24} color='gray' style={{marginHorizontal:10}} />
-      <Feather name='edit-2' size={24} color='gray' style={{marginHorizontal:10}} />
+      <Pressable onPress={() => navigation.navigate('UsersRoom')}>
+        <Feather name='edit-2' size={24} color='gray' style={{marginHorizontal:10}} />
+      </Pressable>
     </ SafeAreaView>
   )
 }
